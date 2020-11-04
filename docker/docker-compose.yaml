@@ -1,0 +1,13 @@
+version: '3.2'
+services:
+  oracle:
+    image: netcracker.com/oracleinanutshell/oracle-xe-11g:dev
+    build: ./oracle/
+    container_name: oracle
+    volumes:
+      - ./oracle/run-init-scripts.sh:/docker-entrypoint-initdb.d/run-init-scripts.sh
+      - ./oracle/init:/docker-entrypoint-initdb.d/init
+      - ./oracle/cleanup:/docker-entrypoint-initdb.d/cleanup
+    ports:
+      - "1521:1521"
+      - "5500:5500"
